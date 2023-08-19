@@ -7,6 +7,7 @@
 sort, bubble and merge*/
 
 //#define TEST_NOW true
+#define LEN 50
 
 void create_random_values_into_array(int *array_addres, int array_size, int range_of_value)
 {
@@ -54,25 +55,43 @@ void linear_order_asc_and_desc_array(
 
 int main(int argc, char **argv)
 {
-    if (argc != 3){
-        fprintf(stderr, "Wrong usage please specify an ordem 1:Anscending 0:descending\n");
-        return 1;
-    }
-
-    int total_values = atoi(argv[1]);
+    
+    FILE *file_output;
     int current_index;
-    int array[total_values];
+    char caracter;
+    
+    // argv[0] filename
+    // argv[1] total values
+    // argv[2] filename
 
-    // Generate randomic numbers between 0 and 99
-    create_random_values_into_array(array, total_values, 100);
-    linear_order_asc_and_desc_array(array, total_values, atoi(argv[2]));
-    // Arrange the values depending of the value passed by the user
+    if (argc != 3){
+        fprintf(stderr, "Usage: %s filename\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
 
     
+    int total_values = atoi(argv[1]);
+    int array[total_values];
+
+    create_random_values_into_array(array, total_values, 100);
+
+    if ((file_output = fopen(argv[2], "w")) == NULL)
+    {
+        fprintf(stderr, "I couldn't open the file \"%s\"\n", argv[2]);
+        exit(EXIT_FAILURE);
+    }
+
     for (current_index = 0; current_index<total_values; current_index++)
     {
-        printf("%d, ", array[current_index]);
+        fprintf(file_output, "%d\n", array[current_index]);
     }
-    printf("\n");
+        
+    // Generate randomic numbers between 0 and 99
+    
+
+    if (fclose(file_output) != 0)
+    {
+        fprintf(stderr, "Error in closing file!\n");
+    }
     return 0;
 }
