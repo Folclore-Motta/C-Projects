@@ -21,6 +21,12 @@ void create_random_values_into_array(int *array_addres, int array_size, int rang
     }
 }
 
+// TO DO
+// Create a binary search the condition
+
+// TO DO
+// Change the name of the function because linear search is to find a value in that case
+// We are using the Selection Sort to ordenate that array
 void linear_order_asc_and_desc_array(
     int *array_addres, int size, bool is_cresent_param)
 {
